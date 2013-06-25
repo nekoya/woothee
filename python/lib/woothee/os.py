@@ -52,6 +52,9 @@ def challenge_osx(ua, result):
       data = dataset.get('iPad')
     elif 'iPod;' in ua:
       data = dataset.get('iPod')
+  obj = re.search('OS (\d+_\d+_\d+)', ua)
+  if obj:
+    util.update_os_version(result, obj.group(1).replace('_', '.'))
   util.update_category(result, data[dataset.KEY_CATEGORY])
   util.update_os(result, data[dataset.KEY_NAME])
   return True
@@ -61,6 +64,9 @@ def challenge_linux(ua, result):
     return False
   if 'Android' in ua:
     data = dataset.get('Android')
+    obj = re.search('Android[- ](\d+\.\d+\.\d+|\d+\.\d+)', ua)
+    if obj:
+      util.update_os_version(result, obj.group(1))
   else:
     data = dataset.get('Linux')
   util.update_category(result, data[dataset.KEY_CATEGORY])

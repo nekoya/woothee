@@ -15,5 +15,8 @@ def update_category(target, category):
 def update_version(target, version):
   target[dataset.ATTRIBUTE_VERSION] = version
 
+def update_os_version(target, version):
+  target[dataset.ATTRIBUTE_OS_VERSION] = version
+
 def update_os(target, os):
   target[dataset.ATTRIBUTE_OS] = os

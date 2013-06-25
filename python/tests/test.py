@@ -34,7 +34,7 @@ class WootheeTest(unittest.TestCase):
     from woothee import dataset
     self.assertEqual(dataset.ATTRIBUTE_LIST,
                      [dataset.ATTRIBUTE_NAME, dataset.ATTRIBUTE_CATEGORY, dataset.ATTRIBUTE_OS,
-                      dataset.ATTRIBUTE_VENDOR, dataset.ATTRIBUTE_VERSION])
+                      dataset.ATTRIBUTE_VENDOR, dataset.ATTRIBUTE_VERSION, dataset.ATTRIBUTE_OS_VERSION])
     self.assertEqual(dataset.CATEGORY_LIST,
                      [dataset.CATEGORY_PC, dataset.CATEGORY_SMARTPHONE, dataset.CATEGORY_MOBILEPHONE,
                       dataset.CATEGORY_CRAWLER, dataset.CATEGORY_APPLIANCE, dataset.CATEGORY_MISC,
@@ -56,10 +56,10 @@ class WootheeTest(unittest.TestCase):
         for es in yaml.load_all(f):
           for e in es:
             r = woothee.parse(e['target'])
-            for attribute in ('name', 'category', 'os', 'version', 'vendor'):
+            for attribute in ('name', 'category', 'os', 'version', 'os_version', 'vendor'):
               testname = groupname + (' test(%s): %s' % (attribute, e['target']))
               if attribute in ('name', 'category') or \
-                (attribute in ('os', 'version', 'vendor') and \
+                (attribute in ('os', 'version', 'os_version', 'vendor') and \
                   attribute in e):
                 #print r[attribute], e[attribute]
                 self.assertEqual(r[attribute], e[attribute], testname)
